@@ -1,5 +1,5 @@
-var express = require('express');
-var path = require('path');
+import express from 'express'
+import path from 'path'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 
@@ -7,11 +7,10 @@ import db from './services/db'
 import log from './services/log'
 import config from './config'
 import api from './api'
-import {
-	errorHandler
-} from './services/errors'
+import { errorHandler } from './services/errors'
 
 let app = express()
+
 app.use(log.middleware)
 app.use(cors())
 app.use(bodyParser.urlencoded({
@@ -22,12 +21,11 @@ app.use(bodyParser.json({
 	limit: '5mb'
 }))
 
-// app.set('view engine', 'html');
 app.set('views', path.join(__dirname, '../client'));
 app.use(express.static(path.join(__dirname, '../client')));
 
 // API
-app.use(`/api/v${config.version}`, api)
+app.use(`/api`, api)
 
 // Global error handling
 app.use(errorHandler)

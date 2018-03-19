@@ -1,13 +1,41 @@
 var express = require('express');
-var router = require('./routes/routes.js')
 var path = require('path');
+import cors from 'cors'
+import bodyParser from 'body-parser'
 
-var app = express();
+import db from './services/db'
+import log from './services/log'
+import config from './config'
+import api from './api'
+import {
+	errorHandler
+} from './services/errors'
 
-app.set('view engine', 'html');
+let app = express()
+app.use(log.middleware)
+app.use(cors())
+app.use(bodyParser.urlencoded({
+	limit: '5mb',
+	extended: true
+}))
+app.use(bodyParser.json({
+	limit: '5mb'
+}))
+
+// app.set('view engine', 'html');
 app.set('views', path.join(__dirname, '../client'));
 app.use(express.static(path.join(__dirname, '../client')));
 
-app.use('/', router);
+// API
+app.use(`/api/v${config.version}`, api)
 
-module.exports=app;
+// Global error handling
+app.use(errorHandler)
+
+// Seed and start
+db.connect(config.mongo)
+	.then(() => app.listen(config.port, () => {
+		log.info('server.startup', 'Application started')
+		log.info('server.startup', `Mode: ${config.env}`)
+		log.info('server.startup', `Port: ${config.port}`)
+	}))

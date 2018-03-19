@@ -5,7 +5,7 @@ import bodyParser from 'body-parser'
 
 import db from './services/db'
 import log from './services/log'
-import config from './config'
+import config from '../config'
 import api from './api'
 import { errorHandler } from './services/errors'
 
@@ -22,7 +22,7 @@ app.use(bodyParser.json({
 }))
 
 app.set('views', path.join(__dirname, '../client'));
-app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(__dirname, '../client/public')));
 
 // API
 app.use(`/api`, api)

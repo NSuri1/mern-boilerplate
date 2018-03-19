@@ -5,3 +5,14 @@ After coming across MERN.io, I was curious about how to get started with the MER
 ### Main Differences From MERN.io Boilerplate
 - Remove Redux store
 - Remove server side rendering
+
+## Quickstart
+```
+cd mern-boilerplate
+npm install
+npm start
+```
+
+**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.com/v3.0/installation/).
+
+Navigate to http://localhost:{PORT_FROM_CONFIG}

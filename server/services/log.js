@@ -1,7 +1,7 @@
 import winston from 'winston'
 import expressWinston from 'express-winston'
 import colors from 'colors/safe'
-import config from '../config'
+import config from '../../config'
 
 const transports = [
 	new winston.transports.Console({

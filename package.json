@@ -23,8 +23,8 @@
   },
   "scripts": {
     "webpack": "webpack --watch",
-    "server": "nodemon ./server/server --exec babel-node --presets es2015,stage-2",
-    "start": "concurrently -k \"npm run webpack\" \"npm run server\""
+    "server": "nodemon --watch ./server ./server/server --exec babel-node --presets es2015,stage-2",
+    "start": "concurrently \"npm run webpack\" \"npm run server\""
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

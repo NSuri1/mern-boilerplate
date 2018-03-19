@@ -22,7 +22,7 @@ async function listDevices(req, response) {
 
 	response.json({
 		success: result != undefined ? true : false,
-		winners: result
+		devices: result
 	})
 }
 
